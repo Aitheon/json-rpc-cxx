@@ -20,7 +20,7 @@ A [JSON-RPC](https://www.jsonrpc.org/) (1.0 & 2.0) framework implemented in C++1
 -   Runtime type checking
 -   Cross-platform (Windows, Linux, OSX)
 
-## Build & Installation with cmake
+## Build with Cmake
 
 -   Copy [include/jsonrpccxx](include) to your include path
 -   Alternatively use CMake install mechanism
