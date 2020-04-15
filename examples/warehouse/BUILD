@@ -1,0 +1,35 @@
+load("@rules_cc//cc:defs.bzl", "cc_library", "cc_binary")
+
+cc_library(
+  name = "libwarehouse",
+  srcs = [
+    "types.h",
+    "warehouseapp.hpp",
+    "warehouseapp.cpp",
+  ],
+  visibility = [
+    "//test:__pkg__"
+  ],
+  copts = ["-Ivendor"],
+  deps = [
+    "//vendor:nlohmann",
+    "//include/jsonrpccxx"
+  ]
+)
+
+cc_binary(
+  name = "warehouse",
+  srcs = [
+    "warehouseapp.hpp",
+    "types.h",
+    "warehouseapp.cpp",
+    "main.cpp"
+  ],
+  copts = ["-Ivendor"],
+  linkopts = ["-lpthread"],
+  deps = [
+    "//include/jsonrpccxx",
+    "//examples:connectors",
+    ":libwarehouse"
+  ]
+)

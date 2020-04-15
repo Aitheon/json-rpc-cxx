@@ -1,5 +1,5 @@
-#include "inmemoryconnector.hpp"
-#include "cpphttplibconnector.hpp"
+#include "examples/inmemoryconnector.hpp"
+#include "examples/cpphttplibconnector.hpp"
 #include "warehouseapp.hpp"
 
 #include <iostream>

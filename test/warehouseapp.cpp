@@ -1,5 +1,5 @@
 
-#include "../examples/warehouse/warehouseapp.hpp"
+#include "examples/warehouse/warehouseapp.hpp"
 #include "integrationtest.hpp"
 
 #define TEST_MODULE "[integration]"

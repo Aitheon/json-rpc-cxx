@@ -20,7 +20,7 @@ A [JSON-RPC](https://www.jsonrpc.org/) (1.0 & 2.0) framework implemented in C++1
 -   Runtime type checking
 -   Cross-platform (Windows, Linux, OSX)
 
-## Installation
+## Build & Installation with cmake
 
 -   Copy [include/jsonrpccxx](include) to your include path
 -   Alternatively use CMake install mechanism
@@ -29,6 +29,55 @@ A [JSON-RPC](https://www.jsonrpc.org/) (1.0 & 2.0) framework implemented in C++1
 mkdir build && cd build
 cmake ..
 sudo make install
+```
+
+## Build with Bazel
+
+### Installing Bazelisk as Bazel
+
+It is recommended to use [Bazelisk](https://github.com/bazelbuild/bazelisk) installed as `bazel`, to avoid Bazel compatibility issues.
+On Linux, run the following commands:
+
+```
+sudo wget -O /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.3.0/bazelisk-linux-amd64
+sudo chmod +x /usr/local/bin/bazel
+```
+
+On macOS, run the follwing command:
+```
+brew install bazelbuild/tap/bazelisk
+```
+
+If you're a fan of Node.js, install your Bazelisk via
+```
+npm install -g @bazel/bazelisk
+```
+
+To install the Go version, type:
+```
+go get github.com/bazelbuild/bazelisk
+```
+To add it to your PATH:
+```
+export PATH=$PATH:$(go env GOPATH)/bin
+```
+
+### Installing Bazel standalone
+To install `bazel` on your own, follow the [Bazel installation](https://docs.bazel.build/versions/master/install.html)
+
+
+### Bazel build commands
+
+Build all
+
+```
+bazel build ...
+```
+
+Build warehouse example
+
+```
+bazel build //examples:warehouse
 ```
 
 ## Usage

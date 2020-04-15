@@ -8,3 +8,6 @@ build/*
 build*/*
 cmake-build-*/*
 .idea/*
+
+# Ignore all bazel-* symlinks
+/bazel-*
