@@ -14,7 +14,6 @@ cc_test(
     "typemapper.cpp",
     "warehouseapp.cpp"
   ],
-  copts = ["-Ivendor"],
   deps = [
     "//vendor:catch",
     "//include/jsonrpccxx",

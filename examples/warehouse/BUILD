@@ -10,7 +10,6 @@ cc_library(
   visibility = [
     "//test:__pkg__"
   ],
-  copts = ["-Ivendor"],
   deps = [
     "//vendor:nlohmann",
     "//include/jsonrpccxx"
@@ -25,7 +24,6 @@ cc_binary(
     "warehouseapp.cpp",
     "main.cpp"
   ],
-  copts = ["-Ivendor"],
   linkopts = ["-lpthread"],
   deps = [
     "//include/jsonrpccxx",
