@@ -19,15 +19,12 @@ cc_library(
 cc_binary(
   name = "warehouse",
   srcs = [
-    "warehouseapp.hpp",
-    "types.h",
-    "warehouseapp.cpp",
     "main.cpp"
   ],
   linkopts = ["-lpthread"],
   deps = [
     "//include/jsonrpccxx",
-    "//examples:connectors",
+    "//include/jsonrpccxx/connectors",
     ":libwarehouse"
   ]
 )
