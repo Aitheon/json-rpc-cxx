@@ -1,11 +1,12 @@
 #pragma once
 
+#include "iserverconnector.hpp"
 #include "common.hpp"
 #include "dispatcher.hpp"
 #include <string>
 
 namespace jsonrpccxx {
-  class JsonRpcServer {
+  class JsonRpcServer : public IServerConnector {
   public:
     virtual ~JsonRpcServer() = default;
     virtual std::string HandleRequest(const std::string &request) = 0;

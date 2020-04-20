@@ -1,5 +1,7 @@
-#include "examples/inmemoryconnector.hpp"
-#include "examples/cpphttplibconnector.hpp"
+#include "jsonrpccxx/connectors/inmemoryconnector.hpp"
+#include "jsonrpccxx/connectors/cpphttplibconnector.hpp"
+#include "jsonrpccxx/connectors/unixdomainsocketclient.h"
+#include "jsonrpccxx/connectors/unixdomainsocketserver.h"
 #include "warehouseapp.hpp"
 
 #include <iostream>
@@ -52,6 +54,13 @@ int main() {
   CppHttpLibClientConnector httpClient("localhost", 8484);
   std::this_thread::sleep_for(0.5s);
   doWarehouseStuff(httpClient);
+
+  cout << "Running unix-socket example" << "\n";
+  jsonrpccxx::UnixDomainSocketServer unixSocketsServer(rpcServer, "./cpp-node");
+  cout << "Starting unix-socket server: " << std::boolalpha << unixSocketsServer.StartListening() << "\n";
+  jsonrpccxx::UnixDomainSocketClient unixSocketsClient("./cpp-node");
+  std::this_thread::sleep_for(0.5s);
+  doWarehouseStuff(unixSocketsClient);
 
   return 0;
 }

@@ -17,7 +17,7 @@ cc_test(
   deps = [
     "//vendor:catch",
     "//include/jsonrpccxx",
-    "//examples:connectors",
+    "//include/jsonrpccxx/connectors",
     "//examples/warehouse:libwarehouse"
   ]
 )
