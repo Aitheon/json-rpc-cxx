@@ -1,0 +1,17 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+      {
+          "label": "Build Warehouse Debug",
+          "type": "shell",
+          "command": "bazel build //examples/warehouse -c dbg",
+          "linux": {
+              "command": "bazel build //examples/warehouse  -c dbg --spawn_strategy=standalone",
+          },
+          "group": {
+              "kind": "build",
+              "isDefault": true
+          },
+      }
+  ]
+}
