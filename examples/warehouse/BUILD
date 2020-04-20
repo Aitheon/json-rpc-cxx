@@ -2,10 +2,12 @@ load("@rules_cc//cc:defs.bzl", "cc_library", "cc_binary")
 
 cc_library(
   name = "libwarehouse",
-  srcs = [
+  hdrs = [
     "types.h",
-    "warehouseapp.hpp",
-    "warehouseapp.cpp",
+    "warehouseapp.hpp"
+  ],
+  srcs = [
+    "warehouseapp.cpp"
   ],
   visibility = [
     "//test:__pkg__"
