@@ -40,6 +40,10 @@ namespace jsonrpccxx {
      */
     virtual void HandleConnection(int connection) = 0;
 
+    virtual void AddConnection(int connection) = 0;
+    virtual void RemoveConnection(int connection) = 0;
+    virtual bool IsRunning(int connection) const = 0;
+
   private:
     IServerConnector &serverConnector;
     bool running;

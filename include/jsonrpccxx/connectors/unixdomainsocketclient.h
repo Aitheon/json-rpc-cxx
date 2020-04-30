@@ -20,10 +20,15 @@ namespace jsonrpccxx
         public:
             UnixDomainSocketClient(const std::string& path);
             virtual ~UnixDomainSocketClient();
+            virtual void Connect();
+            virtual void Disconnect();
             virtual std::string Send(const std::string &request);
+            virtual void Notify(const std::string &request);
+            void Close();
 
         private:
             std::string path;
+            int socket_fd{-1};
     };
 
 } /* namespace jsonrpc */

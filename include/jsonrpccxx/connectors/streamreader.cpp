@@ -1,4 +1,5 @@
 #include "jsonrpccxx/connectors/streamreader.h"
+#include "nlohmann/json.hpp"
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -23,5 +24,16 @@ bool StreamReader::Read(std::string &target, int fd, char delimiter) {
   } while (memchr(buffer, delimiter, bytesRead) == NULL);//(target.find(delimiter) == string::npos && bytesRead > 0);
 
   target.pop_back();
+  return true;
+}
+
+bool NodeIpcStreamReader::Read(std::string &target, int fd, char delimiter)
+{
+  std::string raw;
+  if (!this->reader.Read(raw, fd, delimiter)) {
+    return false;
+  }
+  auto message = nlohmann::json::parse(raw);
+  target = message["data"];
   return true;
 }

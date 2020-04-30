@@ -19,6 +19,10 @@ public:
     return raw_response;
   }
 
+  void Notify(const std::string &r) override {
+    this->request = json::parse(r);
+  }
+
   void SetBatchResult(const json &result) {
     raw_response = result.dump();
   }

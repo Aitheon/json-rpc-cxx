@@ -10,7 +10,7 @@
 #endif
 
 
-#define DEFAULT_DELIMITER_CHAR char(0x0A)
+#define DEFAULT_DELIMITER_CHAR char('\f')
 #define DEFAULT_BUFFER_SIZE 1024
 
 

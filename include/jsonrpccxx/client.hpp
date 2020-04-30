@@ -80,7 +80,7 @@ namespace jsonrpccxx {
       } else if (v == version::v1) {
         j["params"] = nullptr;
       }
-      connector.Send(j.dump());
+      connector.Notify(j.dump());
     }
   };
 } // namespace jsonrpccxx

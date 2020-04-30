@@ -14,6 +14,7 @@ cc_test(
     "typemapper.cpp",
     "warehouseapp.cpp"
   ],
+  linkopts = ["-lpthread"],
   deps = [
     "//vendor:catch",
     "//include/jsonrpccxx",

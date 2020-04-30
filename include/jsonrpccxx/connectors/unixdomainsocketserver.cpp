@@ -35,7 +35,10 @@ UnixDomainSocketServer::~UnixDomainSocketServer() {
 }
 
 bool UnixDomainSocketServer::InitializeListener() {
-  if (access(this->socket_path.c_str(), F_OK) != -1)
+
+  ::unlink(this->socket_path.c_str());
+  auto acc = access(this->socket_path.c_str(), F_OK);
+  if (acc != -1)
     return false;
 
   this->socket_fd = socket(AF_UNIX, SOCK_STREAM, 0);
@@ -73,15 +76,38 @@ int UnixDomainSocketServer::CheckForConnection() {
   return fd;
 }
 
-void UnixDomainSocketServer::HandleConnection(int connection) {
-  string request, response;
-  StreamReader reader(DEFAULT_BUFFER_SIZE);
-  reader.Read(request, connection, DEFAULT_DELIMITER_CHAR);
-  response = this->getServerConnector().HandleRequest(request);
+void UnixDomainSocketServer::AddConnection(int connection) {
+  std::unique_lock<std::mutex> lock;
+  this->clients.emplace(connection);
+}
 
-  response.append(1, DEFAULT_DELIMITER_CHAR);
-  StreamWriter writer;
-  writer.Write(response, connection);
-
+void UnixDomainSocketServer::RemoveConnection(int connection) {
+  std::unique_lock<std::mutex> lock;
   close(connection);
+  this->clients.erase(connection);
+}
+
+bool UnixDomainSocketServer::IsRunning(int connection) const {
+  std::unique_lock<std::mutex> lock;
+  return this->clients.find(connection) != this->clients.end();
+}
+
+void UnixDomainSocketServer::HandleConnection(int connection) {
+
+  while (this->IsRunning(connection)) {
+    string request, response;
+    StreamReader reader(DEFAULT_BUFFER_SIZE);
+    NodeIpcStreamReader nodeIpcReader(reader);
+    nodeIpcReader.Read(request, connection, DEFAULT_DELIMITER_CHAR);
+    response = this->getServerConnector().HandleRequest(request);
+
+    if (!response.empty()) {
+      response.append(1, DEFAULT_DELIMITER_CHAR);
+      StreamWriter writer;
+      NodeIpcStreamWriter nodeIpcWriter(writer);
+      nodeIpcWriter.Write(response, connection, DEFAULT_DELIMITER_CHAR);
+    }
+  }
+
+  this->RemoveConnection(connection);
 }

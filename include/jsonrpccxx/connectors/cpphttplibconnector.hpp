@@ -16,6 +16,13 @@ public:
     return res->body;
   }
 
+  void Notify(const std::string &request) override {
+    auto res = httpClient.Post("/jsonrpc", request, "application/json");
+    if (!res || res->status != 200) {
+      throw jsonrpccxx::JsonRpcException(-32003, "client connector error, received status != 200");
+    }
+  }
+
 private:
   httplib::Client httpClient;
 };

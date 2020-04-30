@@ -52,9 +52,9 @@ TEST_CASE("batchrequest", TEST_MODULE) {
   c.VerifyMethodRequest(version::v2, "some_method2", 2);
   c.Send(request[3].dump());
   c.VerifyMethodRequest(version::v2, "some_method2", "2");
-  c.Send(request[4].dump());
+  c.Notify(request[4].dump());
   c.VerifyNotificationRequest(version::v2, "some_notification1");
-  c.Send(request[5].dump());
+  c.Notify(request[5].dump());
   c.VerifyNotificationRequest(version::v2, "some_notification2");
 }
 

@@ -18,6 +18,8 @@
 #include <sys/types.h>
 #include <sys/un.h>
 #include <unistd.h>
+#include <mutex>
+#include <unordered_set>
 
 #include "streamreader.h"
 #include "streamwriter.h"
@@ -42,10 +44,16 @@ public:
   virtual int CheckForConnection();
   virtual void HandleConnection(int connection);
 
+  virtual void AddConnection(int connection);
+  virtual void RemoveConnection(int connection);
+  virtual bool IsRunning(int connection) const;
+
 private:
   std::string socket_path;
   int socket_fd;
   struct sockaddr_un address;
+  std::unordered_set<int> clients;
+  std::mutex clients_lock;
 };
 
 } /* namespace jsonrpc */
