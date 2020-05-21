@@ -6,7 +6,7 @@ cc_library(
   include_prefix = "jsonrpccxx",
   visibility = ["//visibility:public"],
   deps = [
-    "//vendor:catch",
-    "//vendor:nlohmann"
+    "//third_party:catch",
+    "@github_nlohmann_json//:json"
   ]
 )

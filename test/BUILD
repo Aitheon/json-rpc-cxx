@@ -16,7 +16,7 @@ cc_test(
   ],
   linkopts = ["-lpthread"],
   deps = [
-    "//vendor:catch",
+    "//third_party:catch",
     "//include/jsonrpccxx",
     "//include/jsonrpccxx/connectors",
     "//examples/warehouse:libwarehouse"

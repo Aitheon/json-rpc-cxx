@@ -13,7 +13,7 @@ cc_library(
     "//test:__pkg__"
   ],
   deps = [
-    "//vendor:nlohmann",
+    "@github_nlohmann_json//:json",
     "//include/jsonrpccxx"
   ]
 )

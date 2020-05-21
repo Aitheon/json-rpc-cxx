@@ -7,7 +7,7 @@ cc_library(
   include_prefix = "jsonrpccxx/connectors",
   visibility = ["//visibility:public"],
   deps = [
-    "//vendor:cpp-httplib",
+    "//third_party:cpp-httplib",
     "//include/jsonrpccxx"
   ]
 )
