@@ -74,10 +74,10 @@ Build all
 bazel build ...
 ```
 
-Build warehouse example
+Build & run warehouse example
 
 ```
-bazel build //examples:warehouse
+bazel run //examples/warehouse
 ```
 
 ## Usage
